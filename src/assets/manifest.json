@@ -11,6 +11,8 @@
   "display": "standalone",
   "orientation": "portrait-primary",
   "id": "/src/assets/index.html",
+  "prefer_related_applications": true,
+  "related_applications": [],
   "icons": [
     {
       "src": "/vite.svg",
