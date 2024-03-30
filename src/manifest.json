@@ -1,3 +1,14 @@
 {
-    
+  "name": "Sweaty - Activity Tracker",
+  "short_name": "Sweaty",
+  "start_url": "/index.html",
+  "scope": ".",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#ffffff",
+  "description": "Keep running until you're super sweaty!",
+  "dir": "read direction of our app",
+  "lang": "en-US",
+  "orientation": "potrait-primary",
+  "icons": []
 }
