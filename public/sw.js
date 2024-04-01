@@ -8,10 +8,10 @@ self.addEventListener("install", (event) => {
   );
 });
 
-self.addEventListener("activate", () => {
-  console.log("service worker activated...");
-  return self.clients.claim();
-});
+// self.addEventListener("activate", () => {
+//   console.log("service worker activated...");
+//   return self.clients.claim();
+// });
 
 self.addEventListener("fetch", (event) => {
   console.log("fetching.", event.request.url);
@@ -20,15 +20,15 @@ self.addEventListener("fetch", (event) => {
       if (response) {
         return response;
       }
-      return fetch(event.request).then((response) => {
-        return caches
-          .open("dynamic")
-          .then((cache) => {
-            cache.put(event.request.url, response.clone());
-            return response;
-          })
-          .catch(() => {});
-      });
+      //   return fetch(event.request).then((response) => {
+      //     return caches
+      //       .open("dynamic")
+      //       .then((cache) => {
+      //         cache.put(event.request.url, response.clone());
+      //         return response;
+      //       })
+      //       .catch(() => {});
+      //   });
     })
   );
 });
