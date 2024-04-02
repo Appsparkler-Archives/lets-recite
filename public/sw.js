@@ -16,6 +16,16 @@ self.addEventListener("install", (event) => {
 
 self.addEventListener("activate", (event) => {
   console.log("service worker activated...");
+  event.waitUntil(
+    caches.keys()
+      .then((keys) => {
+        return Promise.all(
+          keys
+            .filter((key) => key !== STATIC_CACHE_KEY && key !== DYNAMIC_CACHE_KEY)
+            .map((key) => caches.delete(key))
+        );
+      })
+  )
   event.waitUntil(self.clients.claim());
 });
 
