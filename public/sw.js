@@ -1,5 +1,5 @@
-const STATIC_CACHE_KEY = "static-v1";
-const DYNAMIC_CACHE_KEY = "dynamic-v1";
+const STATIC_CACHE_KEY = "static-v2";
+const DYNAMIC_CACHE_KEY = "dynamic-v2";
 
 self.addEventListener("install", (event) => {
   event.waitUntil(
@@ -17,15 +17,16 @@ self.addEventListener("install", (event) => {
 self.addEventListener("activate", (event) => {
   console.log("service worker activated...");
   event.waitUntil(
-    caches.keys()
-      .then((keys) => {
-        return Promise.all(
-          keys
-            .filter((key) => key !== STATIC_CACHE_KEY && key !== DYNAMIC_CACHE_KEY)
-            .map((key) => caches.delete(key))
-        );
-      })
-  )
+    caches.keys().then((keys) => {
+      return Promise.all(
+        keys
+          .filter(
+            (key) => key !== STATIC_CACHE_KEY && key !== DYNAMIC_CACHE_KEY
+          )
+          .map((key) => caches.delete(key))
+      );
+    })
+  );
   event.waitUntil(self.clients.claim());
 });
 
