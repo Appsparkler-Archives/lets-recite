@@ -12,6 +12,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
 );
 
 if ("serviceWorker" in navigator) {
+  console.log("registering service worker");
   navigator.serviceWorker
     .register("/sw.js")
     .then(() => console.log("service worker registered..."));
