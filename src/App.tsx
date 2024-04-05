@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
+import { toArray } from "lodash";
 
 interface ITravelCard {
   id: string;
@@ -25,17 +26,24 @@ const MyTravelCard: React.FC<{
 };
 
 function App() {
-  const [card, setCard] = useState<null | ITravelCard>(null);
+  const [cards, setCards] = useState<ITravelCard[]>([]);
   useEffect(() => {
     fetch(
-      "https://learningpwa-610f0-default-rtdb.asia-southeast1.firebasedatabase.app/posts/first-post.json"
+      "https://learningpwa-610f0-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json"
     )
       .then((res) => res.json())
-      .then((card: ITravelCard) => {
-        setCard(card);
+      .then((cards: Record<string, ITravelCard>) => {
+        const travelCards = toArray(cards);
+        setCards(travelCards);
       });
   }, []);
-  return <Box p={2}>{card && <MyTravelCard card={card} />}</Box>;
+  return (
+    <Box p={2}>
+      {cards.map((card) => (
+        <MyTravelCard key={card.id} card={card} />
+      ))}
+    </Box>
+  );
 }
 
 export default App;
