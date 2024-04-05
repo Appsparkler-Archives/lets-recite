@@ -18,6 +18,7 @@ const MyTravelCard: React.FC<{
       </CardMedia>
       <CardContent>
         <Typography variant="h5">{card.title}</Typography>
+        <Typography variant="caption">@{card.location}</Typography>
       </CardContent>
     </Card>
   );
