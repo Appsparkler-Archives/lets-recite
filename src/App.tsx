@@ -38,10 +38,11 @@ function App() {
       });
   }, []);
   return (
-    <Box p={2}>
+    <Box display="flex" flexDirection={"column"} px={2} gap={2}>
       {cards.map((card) => (
         <MyTravelCard key={card.id} card={card} />
       ))}
+
     </Box>
   );
 }
