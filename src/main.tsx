@@ -7,3 +7,7 @@ ReactDOM.createRoot(document.getElementById("root")!).render(
     <App />
   </React.StrictMode>
 );
+
+if ("serviceWorker" in window.navigator) {
+  window.navigator.serviceWorker.register("/sw.js");
+}
