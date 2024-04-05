@@ -1,35 +1,40 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useEffect, useState } from "react";
+import { Box, Card, CardContent, CardMedia, Typography } from "@mui/material";
 
-function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.tsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+interface ITravelCard {
+  id: string;
+  image: string;
+  location: string;
+  title: string;
 }
 
-export default App
+const MyTravelCard: React.FC<{
+  card: ITravelCard;
+}> = ({ card }) => {
+  return (
+    <Card>
+      <CardMedia>
+        <img width="100%" src={card.image} alt={card.location} />
+      </CardMedia>
+      <CardContent>
+        <Typography variant="h5">{card.title}</Typography>
+      </CardContent>
+    </Card>
+  );
+};
+
+function App() {
+  const [card, setCard] = useState<null | ITravelCard>(null);
+  useEffect(() => {
+    fetch(
+      "https://learningpwa-610f0-default-rtdb.asia-southeast1.firebasedatabase.app/posts/first-post.json"
+    )
+      .then((res) => res.json())
+      .then((card: ITravelCard) => {
+        setCard(card);
+      });
+  }, []);
+  return <Box p={2}>{card && <MyTravelCard card={card} />}</Box>;
+}
+
+export default App;
