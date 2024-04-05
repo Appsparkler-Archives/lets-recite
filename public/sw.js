@@ -1,5 +1,5 @@
-const CACHE_STATIC_NAME = "static-v1";
-const CACHE_DYNAMIC_NAME = "dynamic-v1";
+const CACHE_STATIC_NAME = "static-v3";
+const CACHE_DYNAMIC_NAME = "dynamic-v3";
 
 self.addEventListener("install", handleInstall);
 self.addEventListener("activate", handleActivate);
@@ -28,10 +28,19 @@ function handleFetch(event) {
   event.respondWith(fetchFromNetwork(event));
 }
 
+// function fetchFromCacheWithNetworkFallback(event) {
+//   return caches.match(event.request).then((response) => {
+//     if (response) {
+//       return response;
+//     }
+//   });
+// }
+
 function fetchFromNetwork(event) {
   return fetch(event.request)
     .then((response) => {
-      return cacheTheResponse(event, response);
+      cacheTheResponse(event, response);
+      return response.clone();
     })
     .catch(() => {
       return caches.match(event.request);
@@ -39,8 +48,8 @@ function fetchFromNetwork(event) {
 }
 
 function cacheTheResponse(event, response) {
-  caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
-    cache.put(event.request.url, response);
+  return caches.open(CACHE_DYNAMIC_NAME).then((cache) => {
+    cache.put(event.request.url, response.clone());
     return response;
   });
 }

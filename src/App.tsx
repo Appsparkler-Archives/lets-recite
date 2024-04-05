@@ -25,24 +25,26 @@ const MyTravelCard: React.FC<{
   );
 };
 
+const TRAVEL_POSTS_URL =
+  "https://learningpwa-610f0-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json";
+
 function App() {
   const [cards, setCards] = useState<ITravelCard[]>([]);
+
   useEffect(() => {
-    fetch(
-      "https://learningpwa-610f0-default-rtdb.asia-southeast1.firebasedatabase.app/posts.json"
-    )
+    fetch(TRAVEL_POSTS_URL)
       .then((res) => res.json())
       .then((cards: Record<string, ITravelCard>) => {
         const travelCards = toArray(cards);
         setCards(travelCards);
       });
   }, []);
+
   return (
     <Box display="flex" flexDirection={"column"} px={2} gap={2}>
       {cards.map((card) => (
         <MyTravelCard key={card.id} card={card} />
       ))}
-
     </Box>
   );
 }
