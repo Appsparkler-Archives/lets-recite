@@ -1,5 +1,3 @@
-self.importScripts("../node_modules/idb/build/umd.js");
-
 const CACHE_STATIC_NAME = "static-v3";
 const CACHE_DYNAMIC_NAME = "dynamic-v3";
 
