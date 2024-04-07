@@ -123,7 +123,6 @@ function askForNotificationPermission() {
       console.log("No notification permission granted!");
     } else {
       configurePushSub();
-      // displayConfirmNotification();
     }
   });
 }
