@@ -81,7 +81,7 @@ function configurePushSub() {
       .then((sub) => {
         if (sub === null) {
           const vapidPublicKey =
-            "BCvIkKpShJ56bdwthQ4IesqvQLMRR6PibI6Ra83-acopiBXHsZAtvtha5dBY6Cuexcq5bMtDLevF5HLsbKpYx0A";
+            "BISu13vjQ7H4yuNEGZkX40q71hIZlSynY27nUsAkxdsmet3y6HkO2XHfh0AffBRF_dhSolAcufB0lBLvNNSHcEc";
           const convertedVapidPublicKey = urlBase64ToUint8Array(vapidPublicKey);
           return reg.pushManager.subscribe({
             userVisibleOnly: true,
