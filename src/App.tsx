@@ -132,26 +132,26 @@ function displayConfirmNotification() {
   if ("serviceWorker" in navigator) {
     const options: NotificationOptions = {
       body: "You successfully subscribed to our Notification service!",
-      icon: "/src/images/icons/app-icon-96x96.png",
-      image: "/src/images/sf-boat.jpg",
-      dir: "ltr",
-      lang: "en-US", // BCP 47,
-      vibrate: [100, 50, 200],
-      badge: "/src/images/icons/app-icon-96x96.png",
-      tag: "confirm-notification",
-      renotify: true,
-      actions: [
-        {
-          action: "confirm",
-          title: "Okay",
-          icon: "/src/images/icons/app-icon-96x96.png",
-        },
-        {
-          action: "cancel",
-          title: "Cancel",
-          icon: "/src/images/icons/app-icon-96x96.png",
-        },
-      ],
+      // icon: "/src/images/icons/app-icon-96x96.png",
+      // image: "/src/images/sf-boat.jpg",
+      // dir: "ltr",
+      // lang: "en-US", // BCP 47,
+      // vibrate: [100, 50, 200],
+      // badge: "/src/images/icons/app-icon-96x96.png",
+      // tag: "confirm-notification",
+      // renotify: true,
+      // actions: [
+      //   {
+      //     action: "confirm",
+      //     title: "Okay",
+      //     icon: "/src/images/icons/app-icon-96x96.png",
+      //   },
+      //   {
+      //     action: "cancel",
+      //     title: "Cancel",
+      //     icon: "/src/images/icons/app-icon-96x96.png",
+      //   },
+      // ],
     };
 
     navigator.serviceWorker.ready.then(function (swreg) {
