@@ -13,10 +13,11 @@ function handleNotificationClose(event) {
 }
 
 function handleNotificationClick(event) {
-  const notification = event.notificiation
+  const notification = event.notification
   const action = event.action
   
   console.log(notification)
+  console.log(action)
 
   if (action === "confirm") {
     console.log("Confirm was chosen")
@@ -48,7 +49,11 @@ function handlePush(event) {
       body: data.content,
       data: {
         url: data.openUrl
-      }
+      },
+      actions: [
+        { action: "confirm", title: "Confirm" },
+        {action: "cancel", title: "Cancel"}
+      ]
     }
     console.log(data.title, options)
     event.waitUntil(self.registration.showNotification(
