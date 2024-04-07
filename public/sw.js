@@ -4,6 +4,22 @@ const CACHE_DYNAMIC_NAME = "dynamic-v3";
 self.addEventListener("install", handleInstall);
 self.addEventListener("activate", handleActivate);
 self.addEventListener("fetch", handleFetch);
+self.addEventListener("push", handlePush)
+
+function handlePush(event) {
+  if (event.isTrusted && event.data) {
+    const data = JSON.parse(event.data.text())
+    var options = {
+      body: data.content,
+    }
+    console.log(data.title, options)
+    event.waitUntil(self.registration.showNotification(
+      data.title, options
+    ));
+  }
+  
+  console.log("Push notification received", event)
+}
 
 function handleActivate(event) {
   event.waitUntil(self.clients.claim());
@@ -83,3 +99,5 @@ function cacheAllStaticAssets() {
     return cache.addAll(STATIC_ASSETS);
   });
 }
+
+
