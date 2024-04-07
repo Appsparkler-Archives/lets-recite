@@ -5,12 +5,50 @@ self.addEventListener("install", handleInstall);
 self.addEventListener("activate", handleActivate);
 self.addEventListener("fetch", handleFetch);
 self.addEventListener("push", handlePush)
+self.addEventListener("notificationclick", handleNotificationClick)
+self.addEventListener("notificationclose", handleNotificationClose)
+
+function handleNotificationClose(event) {
+  console.log("Notification was closed", event)
+}
+
+function handleNotificationClick(event) {
+  const notification = event.notificiation
+  const action = event.action
+  
+  console.log(notification)
+
+  if (action === "confirm") {
+    console.log("Confirm was chosen")
+    notification.close()
+  } else {
+    event.waitUntil(openTheURL(event))
+  }
+}
+
+function openTheURL(event) {
+  return clients.matchAll().then((clients) => {
+    const client = clients.find(
+      (client) => client.visibilityState === "visible"
+    );
+    if (client !== undefined) {
+      client.navigate("/");
+      client.focus();
+    } else {
+      client.openWindow("/");
+    }
+    event.notification.close()
+  });
+}
 
 function handlePush(event) {
   if (event.isTrusted && event.data) {
     const data = JSON.parse(event.data.text())
     var options = {
       body: data.content,
+      data: {
+        url: data.openUrl
+      }
     }
     console.log(data.title, options)
     event.waitUntil(self.registration.showNotification(
