@@ -27,15 +27,15 @@ function handleNotificationClick(event) {
 }
 
 function openTheURL(event) {
-  return clients.matchAll().then((clients) => {
-    const client = clients.find(
+  return clients.matchAll().then(($clients) => {
+    const client = $clients.find(
       (client) => client.visibilityState === "visible"
     );
     if (client !== undefined) {
       client.navigate("/");
       client.focus();
     } else {
-      client.openWindow("/");
+      clients.openWindow("/");
     }
     event.notification.close()
   });
